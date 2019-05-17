@@ -1,16 +1,17 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once dirname(__FILE__).'/../vendor/autoload.php';
 
-class GoogleAuthenticatorTest extends PHPUnit_Framework_TestCase
+class GoogleAuthenticatorTest extends \PHPUnit\Framework\TestCase
 {
     /* @var $googleAuthenticator PHPGangsta_GoogleAuthenticator */
     protected $googleAuthenticator;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->googleAuthenticator = new PHPGangsta_GoogleAuthenticator();
     }
+
 
     public function codeProvider()
     {
@@ -68,12 +69,10 @@ class GoogleAuthenticatorTest extends PHPUnit_Framework_TestCase
         parse_str($urlParts['query'], $queryStringArray);
 
         $this->assertEquals($urlParts['scheme'], 'https');
-        $this->assertEquals($urlParts['host'], 'api.qrserver.com');
-        $this->assertEquals($urlParts['path'], '/v1/create-qr-code/');
-
-        $expectedChl = 'otpauth://totp/'.$name.'?secret='.$secret;
-
-        $this->assertEquals($queryStringArray['data'], $expectedChl);
+        $this->assertEquals($urlParts['host'], 'chart.apis.google.com');
+        $this->assertEquals($urlParts['path'], '/chart');
+        $expectedChl = "otpauth://totp/$name?secret=$secret";
+        $this->assertEquals($queryStringArray['chl'], $expectedChl);
     }
 
     public function testVerifyCode()
