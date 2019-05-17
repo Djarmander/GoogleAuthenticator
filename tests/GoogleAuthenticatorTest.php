@@ -107,4 +107,11 @@ class GoogleAuthenticatorTest extends \PHPUnit\Framework\TestCase
 
         $this->assertInstanceOf('PHPGangsta_GoogleAuthenticator', $result);
     }
+
+    public function testGenerateReserveCodes() {
+        $result = $this->googleAuthenticator->generateReserveCodes(8,12);
+
+        $this->assertIsArray($result);
+        $this->assertCount(12,$result);
+    }
 }

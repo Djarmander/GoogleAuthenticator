@@ -156,6 +156,21 @@ class PHPGangsta_GoogleAuthenticator
     }
 
     /**
+     * Generating reserve codes
+     *
+     * @param int $length
+     * @param int $count
+     * @return array
+     */
+    public function generateReserveCodes($length = 8, $count = 12) {
+        $reserveCodes = array();
+        for($i = 0; $i < $count; $i++) {
+            $reserveCodes[] = substr(bin2hex(openssl_random_pseudo_bytes($length)),0,$length);
+        }
+        return $reserveCodes;
+    }
+
+    /**
      * Helper class to decode base32.
      *
      * @param $secret
