@@ -18,7 +18,8 @@
         "issues": "https://github.com/PHPGangsta/GoogleAuthenticator/issues"
     },
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "ext-openssl": "*"
     },
 	"autoload": {
 		"classmap": ["PHPGangsta/GoogleAuthenticator.php"]
