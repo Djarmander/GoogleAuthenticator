@@ -36,19 +36,40 @@ echo "Checking Code '$oneCode' and Secret '$secret':\n";
 
 $checkResult = $ga->verifyCode($secret, $oneCode, 2);    // 2 = 2*30sec clock tolerance
 if ($checkResult) {
-    echo 'OK';
+    echo "OK\n\n";
 } else {
-    echo 'FAILED';
+    echo "FAILED\n\n";
 }
+
+$reservedCodesCount = 12;
+$reservedCodesLength = 8;
+$reservedCodes = $ga->generateReserveCodes($reservedCodesLength, $reservedCodesCount);
+for($i = 0; $i < $reservedCodesCount; $i++) {
+    echo "Code $i: {$reservedCodes[$i]}\n";
+}
+
 ```
 Running the script provides the following output:
 ```
-Secret is: OQB6ZZGYHCPSX4AK
+Secret is: CQO4L6PSBGRP2UTY
 
-Google Charts URL for the QR-Code: https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/infoATphpgangsta.de%3Fsecret%3DOQB6ZZGYHCPSX4AK
+Google Charts URL for the QR-Code: https://chart.apis.google.com/chart?choe=UTF-8&chld=H&cht=qr&chs=200x200&chl=otpauth%3A%2F%2Ftotp%2FBlog%3Fsecret%3DCQO4L6PSBGRP2UTY
 
-Checking Code '848634' and Secret 'OQB6ZZGYHCPSX4AK':
+Checking Code '836420' and Secret 'CQO4L6PSBGRP2UTY':
 OK
+
+Code 0: 7f568e36
+Code 1: 86920cd7
+Code 2: dc360045
+Code 3: a82ac2f2
+Code 4: 60d67360
+Code 5: 620bd035
+Code 6: b581329e
+Code 7: be1db9a5
+Code 8: 3710eb92
+Code 9: 875e4ff7
+Code 10: 2ec96a39
+Code 11: 4cbc8b4e
 ```
 
 Installation:
